@@ -13,8 +13,6 @@ es = Elasticsearch([ES_HOST], http_auth=(ES_USER, ES_PASSWORD))
 def scroll_and_dump():
 
     with open(OUT_FILE, 'w') as out_file:
-
-        # Before scroll, process current batch of hits
         for data in helpers.scan(es, index=INDEX_TO_DUMP):
             out_file.write(f"{json.dumps(data['_source'])}\n")
 
