@@ -12,7 +12,7 @@ es = Elasticsearch([ES_HOST], http_auth=(ES_USER, ES_PASSWORD))
 
 def dump_hits(hits, out_file):
     for hit in hits:
-        out_file.write(f'{json.dumps(hit)}\n')
+        out_file.write(f"{json.dumps(hit['_source'])}\n")
 
 
 def scroll_and_dump():
