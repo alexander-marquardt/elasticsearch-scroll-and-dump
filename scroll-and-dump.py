@@ -16,8 +16,8 @@ def dump_hits(hits, out_file):
 
 
 def scroll_and_dump():
-    data = es.search(index=INDEX_TO_DUMP, scroll='1m',  body={"query": {"match_all": {}}})
     with open(OUT_FILE, 'w') as out_file:
+        data = es.search(index=INDEX_TO_DUMP, scroll='1m', body={"query": {"match_all": {}}})
 
         # Get the scroll ID
         sid = data['_scroll_id']
