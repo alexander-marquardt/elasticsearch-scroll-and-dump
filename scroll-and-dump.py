@@ -16,12 +16,14 @@ def dump_hits(hits, out_file):
 
 
 def scroll_and_dump():
-    with open(OUT_FILE, 'w') as out_file:
-        data = es.search(index=INDEX_TO_DUMP, scroll='1m', body={"query": {"match_all": {}}})
+    
+    data = es.search(index=INDEX_TO_DUMP, scroll='1m', body={"query": {"match_all": {}}})
 
-        # Get the scroll ID
-        sid = data['_scroll_id']
-        scroll_size = len(data['hits']['hits'])
+    # Get the scroll ID
+    sid = data['_scroll_id']
+    scroll_size = len(data['hits']['hits'])
+
+    with open(OUT_FILE, 'w') as out_file:
 
         # Before scroll, process current batch of hits
         dump_hits(data['hits']['hits'], out_file)
